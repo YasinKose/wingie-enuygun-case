@@ -32,4 +32,12 @@ class TaskObject
     {
         return new static($task, $difficulty, $time);
     }
+
+    /**
+     * @return float|int
+     */
+    public function difficultyLevel(): float|int
+    {
+        return intval($this->difficulty) * intval($this->time);
+    }
 }
