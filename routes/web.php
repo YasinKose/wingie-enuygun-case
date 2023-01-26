@@ -16,4 +16,5 @@ use Illuminate\Support\Facades\Route;
 
 Route::group(['prefix' => 'developers'], function () {
     Route::get('/', [DeveloperController::class, "getDeveloperList"])->name("developer-list");
+    Route::get('/{developer}', [DeveloperController::class, "getDeveloperDetail"])->name("developer-detail");
 });
