@@ -2,6 +2,8 @@
 
 namespace App\Utils\Task;
 
+use App\Exceptions\TaskProviderNotFoundException;
+
 class TaskProviderManager
 {
     /**
@@ -30,5 +32,22 @@ class TaskProviderManager
     private function addTaskProvider(TaskProviderContract $taskProviderContract): void
     {
         $this->taskProviders[] = $taskProviderContract;
+    }
+
+    /**
+     * @return array
+     */
+    public function getTasks(): array
+    {
+        if ($this->taskProviders === null) {
+            throw new TaskProviderNotFoundException();
+        }
+
+        $taskList = [];
+        foreach ($this->taskProviders as $taskProvider) {
+            $taskList = array_merge($taskList, ...$taskProvider->getTasks());
+        }
+
+        return $taskList;
     }
 }
