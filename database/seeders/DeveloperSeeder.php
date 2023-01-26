@@ -12,7 +12,6 @@ class DeveloperSeeder extends Seeder
         for ($i = 1; $i <= 5; $i++) {
             Developer::create([
                 'name' => sprintf("Developer #%d", $i),
-                'time' => 1,
                 'difficulty' => $i
             ]);
         }
