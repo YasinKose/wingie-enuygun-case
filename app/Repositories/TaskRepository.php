@@ -23,6 +23,6 @@ class TaskRepository implements TaskRepositoryInterface
      */
     public function createTask(TaskObject $taskObject): Task
     {
-        return Task::create($taskObject->toArray());
+        return Task::create((array)$taskObject);
     }
 }
