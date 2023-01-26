@@ -3,6 +3,7 @@
 namespace App\Utils\Task;
 
 use App\Exceptions\TaskProviderNotFoundException;
+use Illuminate\Support\Collection;
 
 class TaskProviderManager
 {
@@ -35,19 +36,19 @@ class TaskProviderManager
     }
 
     /**
-     * @return array
+     * @return Collection
      */
-    public function getTasks(): array
+    public function getTasks(): Collection
     {
         if ($this->taskProviders === null) {
             throw new TaskProviderNotFoundException();
         }
 
-        $taskList = [];
+        $taskList = collect();
         foreach ($this->taskProviders as $taskProvider) {
-            $taskList = array_merge($taskList, ...$taskProvider->getTasks());
+            $taskList->add($taskProvider->getTasks());
         }
 
-        return $taskList;
+        return $taskList->collapse();
     }
 }
