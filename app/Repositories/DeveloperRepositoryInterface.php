@@ -13,6 +13,17 @@ interface DeveloperRepositoryInterface
     public function getAllDevelopers(): Collection;
 
     /**
+     * @return Collection
+     */
+    public function getAllDevelopersWithTaskCount(): Collection;
+
+    /**
+     * @param Developer $developer
+     * @return Developer
+     */
+    public function getDeveloperDetail(Developer $developer): Developer;
+
+    /**
      * @return Developer
      */
     public function findAvailableDeveloper(): Developer;

@@ -17,6 +17,23 @@ class DeveloperRepository implements DeveloperRepositoryInterface
     }
 
     /**
+     * @return Collection
+     */
+    public function getAllDevelopersWithTaskCount(): Collection
+    {
+        return Developer::withCount("tasks")->get();
+    }
+
+    /**
+     * @param Developer $developer
+     * @return Developer
+     */
+    public function getDeveloperDetail(Developer $developer): Developer
+    {
+        return $developer->load("tasks");
+    }
+
+    /**
      * Müsait olan bir kullanıcıyı getir
      *
      * @return Developer
