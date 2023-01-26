@@ -19,10 +19,14 @@ class TaskRepository implements TaskRepositoryInterface
 
     /**
      * @param TaskObject $taskObject
+     * @param int $developerId
      * @return Task
      */
-    public function createTask(TaskObject $taskObject): Task
+    public function createTask(TaskObject $taskObject, int $developerId): Task
     {
-        return Task::create((array)$taskObject);
+        return Task::create([
+            ...(array)$taskObject,
+            ...['developer_id' => $developerId]
+        ]);
     }
 }
