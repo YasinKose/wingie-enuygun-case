@@ -29,9 +29,8 @@ class CreateTaskAction
      */
     public function execute(TaskObject $taskObject): Task
     {
-        $task = $this->taskRepository->createTask($taskObject);
-        $this->divideTaskToDeveloper->execute($task);
+        $developer = $this->divideTaskToDeveloper->execute($taskObject);
 
-        return $task;
+        return $this->taskRepository->createTask($taskObject, $developer->id);
     }
 }
