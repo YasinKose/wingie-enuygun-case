@@ -2,7 +2,7 @@
 
 namespace App\Console\Commands;
 
-use App\Models\Task;
+use App\Actions\CreateTaskAction;
 use App\Utils\Task\TaskProviderManager;
 use Illuminate\Console\Command;
 
@@ -20,8 +20,12 @@ class SeedTaskCommand extends Command
 
     /**
      * @param TaskProviderManager $taskProviderManager
+     * @param CreateTaskAction $createTaskAction
      */
-    public function __construct(private readonly TaskProviderManager $taskProviderManager)
+    public function __construct(
+        private readonly TaskProviderManager $taskProviderManager,
+        private readonly CreateTaskAction    $createTaskAction
+    )
     {
         parent::__construct();
     }
@@ -33,7 +37,7 @@ class SeedTaskCommand extends Command
     {
         $this->taskProviderManager->getTasks()
             ->each(function ($task) {
-                Task::create($task);
+                $this->createTaskAction->execute($task);
             });
 
         $this->info("Veriler sağlayıcıdan çekildi ve sisteme yüklendi!");
