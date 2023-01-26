@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Developer extends Model
 {
@@ -28,4 +29,12 @@ class Developer extends Model
     protected $casts = [
         'intensity' => 'int'
     ];
+
+    /**
+     * @return HasMany
+     */
+    public function tasks(): HasMany
+    {
+        return $this->hasMany(Task::class);
+    }
 }
