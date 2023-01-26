@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Task extends Model
 {
@@ -12,14 +13,16 @@ class Task extends Model
     protected $fillable = [
         'task',
         'difficulty',
-        'time'
+        'time',
+        'developer_id'
     ];
 
     /**
      * @var string[]
      */
     protected $hidden = [
-        'id'
+        'id',
+        'developer_id'
     ];
 
     /**
@@ -36,6 +39,11 @@ class Task extends Model
     protected $appends = [
         'difficulty_level'
     ];
+
+    public function developer(): BelongsTo
+    {
+        return $this->belongsTo(Developer::class);
+    }
 
     /**
      * Zorluk seviyesini hesaplar
