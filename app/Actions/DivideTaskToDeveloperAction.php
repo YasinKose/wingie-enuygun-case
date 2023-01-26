@@ -11,6 +11,9 @@ class DivideTaskToDeveloperAction
 {
     use QueueableAction;
 
+    /**
+     * @param DeveloperRepositoryInterface $developerRepository
+     */
     public function __construct(
         private readonly DeveloperRepositoryInterface $developerRepository
     )

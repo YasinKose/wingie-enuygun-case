@@ -23,6 +23,10 @@ class CreateTaskAction
     {
     }
 
+    /**
+     * @param TaskObject $taskObject
+     * @return Task
+     */
     public function execute(TaskObject $taskObject): Task
     {
         $task = $this->taskRepository->createTask($taskObject);
