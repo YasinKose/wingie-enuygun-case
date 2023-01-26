@@ -37,7 +37,9 @@ class SeedTaskCommand extends Command
     {
         $this->taskProviderManager->getTasks()
             ->each(function ($task) {
-                $this->createTaskAction->execute($task);
+                $this
+                    ->createTaskAction
+                    ->execute($task);
             });
 
         $this->info("Veriler sağlayıcıdan çekildi ve sisteme yüklendi!");
