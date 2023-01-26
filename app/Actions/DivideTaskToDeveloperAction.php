@@ -2,8 +2,8 @@
 
 namespace App\Actions;
 
+use App\DataTransferObjects\TaskObject;
 use App\Models\Developer;
-use App\Models\Task;
 use App\Repositories\DeveloperRepositoryInterface;
 use Spatie\QueueableAction\QueueableAction;
 
@@ -21,25 +21,25 @@ class DivideTaskToDeveloperAction
     }
 
     /**
-     * @param Task $task
+     * @param TaskObject $taskObject
      * @return Developer
      */
-    public function execute(Task $task): Developer
+    public function execute(TaskObject $taskObject): Developer
     {
         $developer = $this->developerRepository->findAvailableDeveloper();
 
-        $developer->increment("intensity", $this->calcIntensity($developer, $task));
+        $developer->increment("intensity", $this->calcIntensity($developer, $taskObject));
 
         return $developer;
     }
 
     /**
      * @param Developer $developer
-     * @param Task $task
+     * @param TaskObject $taskObject
      * @return float|int
      */
-    private function calcIntensity(Developer $developer, Task $task): float|int
+    private function calcIntensity(Developer $developer, TaskObject $taskObject): float|int
     {
-        return $task->difficulty_level / $developer->difficulty;
+        return $taskObject->difficultyLevel() / $developer->difficulty;
     }
 }
