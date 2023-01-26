@@ -2,6 +2,9 @@
 
 namespace App\Providers;
 
+use App\Utils\Task\Providers\ProviderOne;
+use App\Utils\Task\Providers\ProviderTwo;
+use App\Utils\Task\TaskProviderManager;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -11,9 +14,14 @@ class AppServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function register()
+    public function register(): void
     {
-        //
+        $this->app->singleton(TaskProviderManager::class, function () {
+            return new TaskProviderManager([
+                $this->app->make(ProviderOne::class),
+                $this->app->make(ProviderTwo::class),
+            ]);
+        });
     }
 
     /**
