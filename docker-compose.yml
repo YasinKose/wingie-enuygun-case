@@ -1,0 +1,35 @@
+version: "3"
+services:
+    app:
+        container_name: app
+        build: images/build/php
+        restart: always
+        volumes:
+            - .:/var/www/html
+    mysql:
+        container_name: mysql-app
+        image: mysql:latest
+        restart: always
+        volumes:
+            - ./images/volumes/mysql:/var/lib/mysql
+        environment:
+            - MYSQL_DATABASE=${DB_DATABASE:-laravel}
+            - MYSQL_USER=${DB_USERNAME:-enuygun}
+            - MYSQL_PASSWORD=${DB_PASSWORD:-secret}
+            - MYSQL_ROOT_PASSWORD=${DB_PASSWORD:-secret}
+    nginx:
+        container_name: nginx-app
+        image: nginx:alpine
+        restart: always
+        ports:
+            - "80:80"
+        volumes:
+            - .:/var/www/html
+            - ./images/nginx/conf.d:/etc/nginx/conf.d
+            - ./images/logs/nginx:/var/log/nginx
+    phpmyadmin:
+        container_name: phpmyadmin-app
+        image: phpmyadmin/phpmyadmin:latest
+        restart: always
+        environment:
+            - PMA_ARBITRARY=1
