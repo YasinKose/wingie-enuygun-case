@@ -12,5 +12,8 @@ interface DeveloperRepositoryInterface
      */
     public function getAllDevelopers(): Collection;
 
+    /**
+     * @return Developer
+     */
     public function findAvailableDeveloper(): Developer;
 }
