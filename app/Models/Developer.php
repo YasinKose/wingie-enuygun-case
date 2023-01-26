@@ -12,7 +12,7 @@ class Developer extends Model
     protected $fillable = [
         'name',
         'difficulty',
-        'time'
+        'intensity'
     ];
 
     /**
@@ -20,5 +20,12 @@ class Developer extends Model
      */
     protected $hidden = [
         'id'
+    ];
+
+    /**
+     * @var string[]
+     */
+    protected $casts = [
+        'intensity' => 'int'
     ];
 }
