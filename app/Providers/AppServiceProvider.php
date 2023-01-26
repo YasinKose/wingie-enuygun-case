@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Repositories\DeveloperRepository;
+use App\Repositories\DeveloperRepositoryInterface;
 use App\Repositories\TaskRepository;
 use App\Repositories\TaskRepositoryInterface;
 use App\Utils\Task\Providers\ProviderOne;
@@ -26,6 +28,7 @@ class AppServiceProvider extends ServiceProvider
         });
 
         $this->app->bind(TaskRepositoryInterface::class, TaskRepository::class);
+        $this->app->bind(DeveloperRepositoryInterface::class, DeveloperRepository::class);
     }
 
     /**
