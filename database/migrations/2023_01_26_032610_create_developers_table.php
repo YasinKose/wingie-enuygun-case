@@ -11,7 +11,7 @@ return new class extends Migration {
             $table->id();
             $table->string("name");
             $table->tinyInteger("difficulty")->default(1);
-            $table->tinyInteger("time")->default(1);
+            $table->integer("intensity")->default(0);
             $table->timestamps();
         });
     }
