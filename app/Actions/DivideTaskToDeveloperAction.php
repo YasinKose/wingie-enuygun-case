@@ -5,12 +5,9 @@ namespace App\Actions;
 use App\DataTransferObjects\TaskObject;
 use App\Models\Developer;
 use App\Repositories\DeveloperRepositoryInterface;
-use Spatie\QueueableAction\QueueableAction;
 
 class DivideTaskToDeveloperAction
 {
-    use QueueableAction;
-
     /**
      * @param DeveloperRepositoryInterface $developerRepository
      */
