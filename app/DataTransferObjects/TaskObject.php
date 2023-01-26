@@ -2,9 +2,7 @@
 
 namespace App\DataTransferObjects;
 
-use Illuminate\Contracts\Support\Arrayable;
-
-class TaskObject implements Arrayable
+class TaskObject
 {
     /**
      * @param string $task
@@ -12,9 +10,9 @@ class TaskObject implements Arrayable
      * @param string $time
      */
     public function __construct(
-        private readonly string $task,
-        private readonly string $difficulty,
-        private readonly string $time
+        public readonly string $task,
+        public readonly string $difficulty,
+        public readonly string $time
     )
     {
     }
@@ -33,17 +31,5 @@ class TaskObject implements Arrayable
     ): static
     {
         return new static($task, $difficulty, $time);
-    }
-
-    /**
-     * @return array
-     */
-    public function toArray(): array
-    {
-        return [
-            'task' => $this->task,
-            'difficulty' => $this->difficulty,
-            'time' => $this->time
-        ];
     }
 }
